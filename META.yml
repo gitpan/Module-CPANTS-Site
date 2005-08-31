@@ -1,0 +1,25 @@
+---
+name: Module-CPANTS-Site
+version: 0.02
+author:
+  - Thomas Klausner, domm@zsi.at
+abstract: Catalyst based application
+license: perl
+requires:
+  Catalyst: 5.10
+  Module::CPANTS::Generator: 0.40
+provides:
+  Module::CPANTS::Site:
+    file: lib/Module/CPANTS/Site.pm
+    version: 0.02
+  Module::CPANTS::Site::C::Author:
+    file: lib/Module/CPANTS/Site/C/Author.pm
+  Module::CPANTS::Site::C::Dist:
+    file: lib/Module/CPANTS/Site/C/Dist.pm
+  Module::CPANTS::Site::C::Highscores:
+    file: lib/Module/CPANTS/Site/C/Highscores.pm
+  Module::CPANTS::Site::C::Kwalitee:
+    file: lib/Module/CPANTS/Site/C/Kwalitee.pm
+  Module::CPANTS::Site::V::TT:
+    file: lib/Module/CPANTS/Site/V/TT.pm
+generated_by: Module::Build version 0.2609

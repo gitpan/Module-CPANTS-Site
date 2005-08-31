@@ -1,0 +1,25 @@
+[% titles = {
+   many=>"Author with five or more dists on CPAN",
+   few=>"Author with less than five dists on CPAN"
+} %]
+
+<h1>[% titles.$top40type %]</h1>
+
+<table cellspacing=5>
+<tr><th>Rank</th><th>Pause-ID</th><th>Name</th><th>Average Kwalitee</th><th>Number of dists</th></tr>
+[% rank %]
+[% WHILE (a = list.next ) %]
+<tr><td align="center">[% IF rank != a.rank %][% a.rank %][% rank = a.rank %][% ELSE %].[% END %]</td><td><a href="/author/[% a.pauseid %]">[% a.pauseid %]</td><td>[% a.name %]</td><td>[% a.average_kwalitee %]</td><td align="center">[% a.num_dists %]</td></tr>
+[% END%]
+</table>
+
+[% IF pager.previous_page %]
+<a href="[% top40type %]?page=[% pager.previous_page %]">
+prev [% pager.entries_per_page %]</a> |
+[% END %]
+[% IF pager.next_page %]
+<a href="[% top40type %]?page=[% pager.next_page %]">
+next [% pager.entries_per_page %]</a>
+[% END %]
+
+

@@ -1,0 +1,13 @@
+<h1>Highscores</h1>
+
+<p>Here you find some 'highscores' or Top-20 of module authores and distributions. Please note that Kwalitee is still a very ALPHA concept and might be quite buggy. And some of the metrics might make no sense. This list is in now way ment as a list of 'best' or 'good' Perl programmers.</p>
+
+
+<ul>
+<li><a href="hall_of_fame">Hall of Fame - Best Distributions</a>
+<li><a href="hall_of_shame">Hall of Shame - Worst Distributions</a>
+<li><a href="many">Top 40 (5 or more dists)</a>
+<li><a href="few">Top 40 (less than 5 dists)</a>
+</ul>
+
+

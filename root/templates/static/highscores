@@ -1,0 +1,45 @@
+<h1>Highscores</h1>
+
+<h2>TODO</h2>
+
+<p>Here you find some 'highscores' or Top-20 of module authores and distributions. Please note that Kwalitee is still a very ALPHA concept and might be quite buggy. And some of the metrics might make no sense. This list is in now way ment as a list of 'best' or 'good' Perl programmers.</p>
+
+<p>Available Kwalitee: [% total %]; Average Kwalitee: [% average %]</p>
+
+<ul>
+<li><a href="#more5">20 'best' Authors with more than 5 dists on CPAN</a>
+<li><a href="authors_more5.html">All authors with more than 5 dists on CPAN</a>
+<li><a href="#less5">20 'best' Authors with 5 or less dists on CPAN</a>
+<li><a href="authors_less5.html">All authors with 5 or less dists on CPAN</a>
+<li><a href="#bestdists">Best Distributions</a>
+<li><a href="#worstdists">Worst Distributions</a>
+</ul>
+
+
+<h2><a name='more5'></a>Authors with more than five dists on CPAN</h2>
+[%# INCLUDE 'highscores_list' highscores=more5 %]
+<p><b><a href="authors_more5.html">List of all authors</a></b></p>
+
+
+<h2><a name='less5'></a>Authors with five or less dists on CPAN</h2>
+[%# INCLUDE 'highscores_list' highscores=less5 %]
+<p><b><a href="authors_less5.html">List of all authors</a></b></p>
+
+<h2><a name='bestdists'></a>Best Distributions</h2>
+
+[% best_dist %]
+<table cellspacing=5>
+<tr><th>Distribution</th><th>Author</th><th>Kwalitee</th></tr>
+[% WHILE (d = best_dists.next ) %]
+<tr><td>[% d.dist %]<td><a href="/author/[% d.author.pauseid %]">[% d.author.pauseid %]</td><td>[% d.kwalitee.kwalitee %]</td></tr>
+[% END%]
+</table>
+
+<h2><a name='worstdists'></a>Worst Distributions</h2>
+<table cellspacing=5>
+<tr><th>Distribution</th><th>Author</th><th>Kwalitee</th></tr>
+[% WHILE (d = worst_dists.next ) %]
+<tr><td>[% d.dist %]<td><a href="/author/[% d.author.pauseid %]">[% d.author.pauseid %]</td><td>[% d.kwalitee.kwalitee %]</td></tr>
+[% END%]
+</table>
+

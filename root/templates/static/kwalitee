@@ -1,0 +1,37 @@
+<h1>Kwalitee</h1>
+
+<h3>What's "Kwalitee", anyway?</h3>
+
+<p>I'll hand the micropohone over to Schwern (or rather: I'll copy'n'paste from his <a href="http://magnonel.guild.net/~schwern/talks/CPANTS/">old CPANTS slides</a>):
+
+<pre>
+  What is a good module? That's hard to say.
+  
+  What is good code? That's also hard to say.
+  
+  "Quality" is not a well-defined term in computing ... and especially not Perl.
+
+  One man's Thing of Beauty is another's man's Evil Hack
+  
+  Since we can't define quality, how do we write a program to assure it?
+</pre>
+  
+<p>Schwern decided to cleverly avoid this problem by not testing for quality but for Kwalitee: It looks like quality, it sounds like quality, but it's not quite quality.</p>
+
+<h3>Current Kwalitee Indicators</h3>
+
+<p><b>Total Kwalitee available: [% total %]</b></p>
+
+<dl>
+[% FOREACH k IN kwalitee %]
+<dt>[% k.name %]</dt>
+<dd>Shortcoming: [% k.error %]<br>
+Defined in: [% k.defined_in %]<br>
+<a href="/dist/shortcoming?metric=[% k.name %]">Show dists with this shortcoming</a>
+</dd>
+
+[% END%]
+</dl>
+
+
+

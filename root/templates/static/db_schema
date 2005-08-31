@@ -1,0 +1,10 @@
+<h1>DB Schema</h1>
+
+<p>Here's the schema of the SQLite DB (<a href='/i/cpants.db.bz2'>cpants.db.bz2</a>):</p>
+
+<pre>
+[% schema %]
+</pre>
+
+
+

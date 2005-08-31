@@ -1,0 +1,30 @@
+
+<p>CPANTS is an acronym for <b>CPAN</b> <b>T</b>esting <b>S</b>ervice. (I assume everyone knows that <a href="http://www.cpan.org">CPAN</a> stands for <b>C</b>omprehensive <b>P</b>erl <b>A</b>rchive <b>N</b>etwork).</p>
+
+<p>The goals of the CPANTS project are to provide some sort of quality measure (called <b>"<a href="/kwalitee.html">Kwalitee</a>"</b>) and lots of metadata for all distributions on CPAN.</p>
+
+<p>CPANTS is not about running the test suite that most distributions ship with. This is done by the <a href="http://testers.cpan.org/">CPAN testers</a>.</p>
+
+<p>Currently, CPANTS consists two things:
+a SQLite DB containing all metadata and <a href="/kwalitee.html">Kwalitee</a> ratings of all distributions; and this website.
+</p>
+
+<p>One big limitation of CPANTS is that it cannot actually execute any code: The module might not run on the machine doing the testing, it might have third-party dependencies, etc. CPANTS can only gather data and Kwalitee by looking at files, source code etc. This means that there are a lot of bugs in the Kwalitee-calculating code. Don't take everything here too serious! In a future version it might be possible to collect metadata from various distributed testers who run the tests on different platforms and settings (as CPAN testers do).</p>
+
+<h2>Current CPANTS data</h2>
+
+<p>You can download the latest CPANTS data as an SQLite database here:
+<ul>
+<li><a href='/i/cpants.db.bz2'>cpants.db.bz2</a> (SQLite 3.0)
+<li><a href='/db_schema.html'>SQL schema of the DB</a>
+</ul>
+</p>
+
+<p>The CPANTS SQLite database offers the most powerfull interface to CPANTS data.  But there are other ways to access (parts of) the data:
+</p>
+<ul>
+<li>Search for <a href="/author/search">authors</a> and <a href="/dist/search">distributions</a>.
+<li>Take a look at the <a href="highscores">various</a> <a href="graphs.html">reports</a> generated at this site.
+</ul>
+
+

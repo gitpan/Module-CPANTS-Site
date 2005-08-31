@@ -1,0 +1,24 @@
+[% IF title %]
+<h1>[% title %]</h1>
+[% END %]
+
+<p>Please note that Kwalitee is still a very ALPHA concept and might be quite buggy. And some of the metrics might make no sense. This list is in now way ment as a list of 'best' or 'good' Perl programmers.</p>
+
+<table cellspacing=5>
+<tr><th>Rank</th><th>CPANID</th><th>Name</th><th>Average Kwalitee</th><th>Number of dists</th></tr>
+[% prev = 0 %]
+[% FOREACH r IN highscores %]
+<tr><td align='right'>
+[% IF prev == r.4 %]
+.
+[% ELSE %]
+[% r.4 %]
+[% END %]
+[% prev=r.4 %]
+</td>
+<td><a href="authors/[% r.0 %].html">[% r.0 %]</td><td>[% r.1 %]</td><td>
+[% IF r.6 %]<img src='[% r.6 %].png' ALT='previous: [% r.5 %]' title="previous: [% r.5 %]">[% ELSE %]<img src='same.png' alt='no change'>[% END %]
+[% r.2%]</td><td align='center'>[% r.3 %]</td></tr>
+[% END%]
+</table>
+
