@@ -1,4 +1,4 @@
-<h1>[% title %]</h1>
+<h1>[% title %]: [% list.count %] Entries</h1>
 
 <table cellspacing=5>
 <tr><th>Distribution</th><th>Author</th><th>Kwalitee</th></tr>

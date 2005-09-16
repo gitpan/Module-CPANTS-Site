@@ -8,6 +8,7 @@ lib/Module/CPANTS/Site/C/Kwalitee.pm
 lib/Module/CPANTS/Site/V/TT.pm
 Makefile.PL
 MANIFEST			This list of files
+META.yml
 README
 root/i/cpants.css
 root/templates/author/search
@@ -36,4 +37,4 @@ script/module_cpants_site_test.pl
 t/01app.t
 t/02pod.t
 t/03podcoverage.t
-META.yml
+TODO

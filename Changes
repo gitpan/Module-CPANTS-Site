@@ -1,8 +1,22 @@
 #-----------------------------------------------------------------
 # Changes for Module::CPANTS::Site
-# $Rev: 15 $
-# $Date: 2005-08-26 16:36:04 +0200 (Fri, 26 Aug 2005) $ 
+# $Rev: 1256 $
+# $Date: 2005-09-16T20:02:48.576236Z $ 
 #-----------------------------------------------------------------
+
+2005-09-16 (r1255@domm)
+----------
+* Display new 'remedy' info on various places throughout the site
+
+
+2005-09-11
+----------
+d: show up/down movements in top40
+
+
+2005-09-06
+----------
+d: display kwalitee movement
 
 
 2005-08-26

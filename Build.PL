@@ -7,7 +7,7 @@ my $build = Catalyst::Build->new(
     module_name        => 'Module::CPANTS::Site',
     requires           => { 
         Catalyst => '5.10',
-        'Module::CPANTS::Generator' => '0.40',
+        'Module::CPANTS::Generator' => '0.41',
     },
     create_makefile_pl => 'passthrough',
     script_files       => [ glob('script/*') ],

@@ -11,6 +11,22 @@
 <td><b>Kwalitee</b></td>
 <td>[% dist.kwalitee.kwalitee %] (<a href="/kwalitee/[% dist.kwalitee %]">details</a>)</td>
 </tr>
+[% IF total == dist.kwalitee.kwalitee %]
+<tr><td colspan=2>This distribution passes all CPANTS tests. Yay!</td></tr>
+[% ELSE %]
+[% kwal = dist.kwalitee %]
+<tr><td colspan=2><b>How to raise Kwalitee</b><br>
+<dl>
+[% FOREACH kw IN kwal.columns.sort %]
+[% NEXT IF kw == 'id' || kw == 'kwalitee' %]
+[% NEXT IF kwal.$kw %]
+<dt>[% kwalitee_hash.$kw.name %]</dt>
+<dd>[% kwalitee_hash.$kw.remedy %]<dd>
+[% END %]
+</dl></td>
+
+</tr>
+[% END %]
 <tr><td>&nbsp;</td></tr>
 <tr>
 <td colspan="2" class="grey"><b>Metadata</b></td>

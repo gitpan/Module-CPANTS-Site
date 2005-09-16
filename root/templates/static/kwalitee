@@ -25,8 +25,9 @@
 <dl>
 [% FOREACH k IN kwalitee %]
 <dt>[% k.name %]</dt>
-<dd>Shortcoming: [% k.error %]<br>
-Defined in: [% k.defined_in %]<br>
+<dd><b>Shortcoming:</b> [% k.error %]<br>
+<b>Remedy:</b> [% k.remedy %]<br>
+<b>Defined in:</b> [% k.defined_in %]<br>
 <a href="/dist/shortcoming?metric=[% k.name %]">Show dists with this shortcoming</a>
 </dd>
 

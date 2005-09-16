@@ -6,7 +6,7 @@ use Catalyst qw/-Debug Static/;
 use lib '/home/domm/perl/Module-CPANTS-Generator/lib';
 use Module::CPANTS::Generator;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 Module::CPANTS::Site->config(
     name=>'CPANTS',
@@ -14,7 +14,7 @@ Module::CPANTS::Site->config(
 
 Module::CPANTS::Site->setup;
 
-foreach (qw(cpants_schema c_cpants_indicators)) {
+foreach (qw(cpants_schema c_cpants_indicators c_cpants_indicators_hash)) {
     __PACKAGE__->mk_classdata($_);
 }
 
@@ -23,7 +23,14 @@ sub i : Global {
     $c->serve_static; # from Catalyst::Plugin::Static
 }
 
-
+sub begin : Private {
+    my ($self,$c)=@_;
+    my $ind=$self->cpants_indicators;
+    my $ind_h=$self->cpants_indicators_hash;
+    $c->stash->{kwalitee}=$ind;
+    $c->stash->{kwalitee_hash}=$ind_h;
+    $c->stash->{total}=scalar @$ind;
+}
 
 #----------------------------------------------------------------
 # pseudo-static pages
@@ -49,10 +56,6 @@ sub dbschema : Path('/db_schema.html') {
 
 sub kwalitee : Path('/kwalitee.html') {
     my ($self,$c) = @_;
-    
-    my $ind=$self->cpants_indicators;
-    $c->stash->{kwalitee}=$ind;
-    $c->stash->{total}=scalar @$ind;
     $c->stash->{template} = "static/kwalitee";
 }
 
@@ -124,6 +127,16 @@ sub cpants_indicators {
     my $cp=Module::CPANTS::Generator->new;
     $ind=$cp->get_indicators;
     $self->c_cpants_indicators($ind);
+    return $ind;
+}
+sub cpants_indicators_hash {
+    my $self=shift;
+    my $ind=$self->c_cpants_indicators_hash;
+    return $ind if $ind;
+    
+    my $cp=Module::CPANTS::Generator->new;
+    $ind=$cp->get_indicators_hash;
+    $self->c_cpants_indicators_hash($ind);
     return $ind;
 }
 

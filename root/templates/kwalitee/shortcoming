@@ -1,5 +1,5 @@
 <h1>Indicator: [% indicator.name %]</h1>
 
-<p>[% indicator.error %]</p>
+<p>Problem: [% indicator.error %]</p>
 
 <p><a href="/dist/shortcoming?metric=[% indicator.name %]">Show distributions with this shortcoming</a></p>
