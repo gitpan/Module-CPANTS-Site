@@ -1,11 +1,40 @@
 #-----------------------------------------------------------------
 # Changes for Module::CPANTS::Site
-# $Rev: 1256 $
-# $Date: 2005-09-16T20:02:48.576236Z $ 
+# $Rev: 1398 $
+# $Date: 2005-09-24T19:09:08.384431Z $ 
 #-----------------------------------------------------------------
 
-2005-09-16 (r1255@domm)
+
+2005-09-24 (r1397@domm)
 ----------
+!! released as Module-CPANTS-Site-0.04
+
+
+2005-09-20 (r1285@domm)
+----------
+* show date of data creation (suggested by ambs)
+* rewrote index page
+* added links to perl-qa
+* added links to various CPANTS talks
+* renamed 'highscores' to 'The CPANTS game' to underline the
+  game character of CPANTS (and stop people taking it
+  dead serious)
+* added information on when data is calculated
+
+
+2005-09-19
+----------
+* show remedies in kwalitee/shortcoming (suggested by Tels)
+
+
+2005-09-17 (r1261@domm)
+----------
+* disabled: Message to show during recalculation
+
+
+2005-09-16 (r1260@domm)
+----------
+!! released as Module-CPANTS-Site-0.03
 * Display new 'remedy' info on various places throughout the site
 
 

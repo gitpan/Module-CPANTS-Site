@@ -6,7 +6,7 @@ use Catalyst qw/-Debug Static/;
 use lib '/home/domm/perl/Module-CPANTS-Generator/lib';
 use Module::CPANTS::Generator;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 Module::CPANTS::Site->config(
     name=>'CPANTS',
@@ -30,6 +30,8 @@ sub begin : Private {
     $c->stash->{kwalitee}=$ind;
     $c->stash->{kwalitee_hash}=$ind_h;
     $c->stash->{total}=scalar @$ind;
+
+    $c->stash->{run_date}=$self->run_date;
 }
 
 #----------------------------------------------------------------
@@ -39,6 +41,11 @@ sub pseudostatic : Regex('^(\w+).html') {
     my ($self,$c) = @_;
     my $file=$c->req->snippets->[0];
     $c->stash->{template} = "static/$file";
+}
+
+sub disabled : Path('/disabled.html') {
+    my ($self,$c) = @_;
+    $c->stash->{template} = "static/disabled";
 }
 
 sub dbschema : Path('/db_schema.html') {
@@ -138,6 +145,15 @@ sub cpants_indicators_hash {
     $ind=$cp->get_indicators_hash;
     $self->c_cpants_indicators_hash($ind);
     return $ind;
+}
+
+my $run_date='';
+sub run_date {
+    my $self=shift;
+    return $run_date if $run_date;
+    my $dbh=Module::CPANTS::DB->db_Main;
+    $run_date=$dbh->selectrow_array('select date from version');
+    return $run_date;
 }
 
 =head1 NAME

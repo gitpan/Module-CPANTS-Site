@@ -1,7 +1,8 @@
-<h1>Highscores</h1>
+<h1>The CPANTS mulitplayer online game</h1>
 
-<p>Here you find some 'highscores' or Top-20 of module authores and distributions. Please note that Kwalitee is still a very ALPHA concept and might be quite buggy. And some of the metrics might make no sense. This list is in now way ment as a list of 'best' or 'good' Perl programmers.</p>
+<p>Here you find some 'highscores' or Top-20 of module authores and distributions. Please note that Kwalitee is still a very ALPHA concept and might be quite buggy. And some of the metrics might make no sense. Those lists are in now way ment as a list of 'best' or 'good' Perl programmers (similar to XP on <a href="http://www.perlmonks.org">perlmonks</a>). They are lists of good CPANTS players ... it's a game, after all!</p>
 
+<p>Currently data is created in the night from Saturday to Sunday (CET). You should upload your improved distributions on Friday at the latests, as it may take the CPAN-mirror I'm using some time to catch up.</p>
 
 <ul>
 <li><a href="hall_of_fame">Hall of Fame - Best Distributions</a>

@@ -22,9 +22,8 @@ root/templates/highscores/top40
 root/templates/kwalitee/shortcoming
 root/templates/kwalitee/view
 root/templates/static/db_schema
+root/templates/static/disabled
 root/templates/static/graphs
-root/templates/static/highscores
-root/templates/static/highscores_list
 root/templates/static/index
 root/templates/static/kwalitee
 root/templates/widgets/pager

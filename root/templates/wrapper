@@ -12,7 +12,7 @@
 <div class="nav">
 <a href='/index.html'>Home</a> |
 <a href='/kwalitee.html'>Kwalitee</a> |
-<a href='/highscores/'>Highscores</a> |
+<a href='/highscores/'>The CPANTS game</a> |
 <a href='/graphs.html'>Graphs</a> &nbsp; &nbsp; || &nbsp; &nbsp;
 <a href='/dist/search'>Distributions</a> | 
 <a href='/author/search'>Authors</a> 
@@ -21,14 +21,14 @@
 </div>
 
 <div class="content">
+[%# INCLUDE 'static/disabled' %]
 [% content %]
 </div>
 
 <div class="footer">
 Site generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Site/">Module::CPANTS::Site</a>, version [% VERSION %].<br>
-CPANTS data generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Generator/">Module::CPANTS::Generator</a>, version [% generator_version %].
-<!--<b>[%# now.strftime("%F %T") %]</b>--><br> 
-Site maintained by Thomas Klausner - domm@zsi.at
+CPANTS data generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Generator/">Module::CPANTS::Generator</a>, version [% generator_version %], at <b>[% run_date %].</b><br> 
+CPANTS and Site maintained by Thomas Klausner - domm@zsi.at
 </div>
 
 </body>
