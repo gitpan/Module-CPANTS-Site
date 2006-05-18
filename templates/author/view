@@ -1,0 +1,45 @@
+<h1>Author: [% item.name %] ([% item.pauseid %])</h1>
+
+<table>
+<tr>
+    <td><b>Email</b></td><td>[% item.email %]</td>
+</tr>
+<tr>
+    <td><b>Average Kwalitee</b></td>
+    <td>[% item.average_kwalitee %]</td>
+</tr>
+<tr>
+    <td><b>Liga</b></td>
+    <td><a href='/highscores/[% item.num_dists >=5 ? "many'>5 or more" : "few'>less than 5" %]</a></td>
+</tr>
+<tr>
+    <td><b>Rank</td>
+    <td>[% item.rank %]</td>
+</tr>
+</table>
+
+<h4>[% item.num_dists %] Dist[% "s" UNLESS item.num_dists == 1 %]:</h4>
+
+<table>
+<tr><td>Dist</td><td>Kwalitee</td>
+[% FOREACH kw IN item.dists.0.kwalitee.columns.sort %]
+[% NEXT IF kw == 'id' || kw == 'dist' %]
+<td style="text"><a title="[% kw %]" href="/kwalitee/shortcoming?name=[% kw %]">#</a></td>
+[% END %]
+</tr>
+[% FOREACH d IN item.dists %]
+[% kwal = d.kwalitee %]
+<tr>
+<td><a href="/dist/[% d.dist %]">[% d.dist %]</td>
+<td align="center">[% kwal.kwalitee %]</td>
+
+[% FOREACH kw IN kwal.columns.sort %]
+[% NEXT IF kw == 'id' || kw == 'dist' %]
+<td class="[% kwal.$kw ? 'ok' : 'not_ok' %]" align="center" title="[% kw %]">[% kwal.$kw ? '+' : '-' %]</td>
+[% END %]
+
+</tr>
+[% END %]
+</table>
+
+

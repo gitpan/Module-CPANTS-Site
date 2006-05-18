@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>CPANTS - CPAN Testing Service</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="/static/cpants.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<div class="top"><a href="/index.html">CPANTS - The CPAN Testing Service</a></div>
+<div class="nav">
+<a href='/index.html'>Home</a> |
+<a href='/kwalitee.html'>Kwalitee</a> |
+<a href='/highscores/'>The CPANTS game</a> |
+<a href='/graphs.html'>Graphs</a> &nbsp; &nbsp; || &nbsp; &nbsp;
+<a href='/dist/search'>Distributions</a> | 
+<a href='/author/search'>Authors</a> 
+&nbsp; &nbsp; || &nbsp; &nbsp;
+<span style="color:#f00">ALPHA VERSION - Hic sunt dracones!</span>
+</div>
+
+[% INCLUDE 'widgets/distlinks' IF dist %]
+
+<div class="content">
+[% content %]
+</div>
+
+<div class="footer">
+<p>
+Site generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Site/">Module::CPANTS::Site</a>, version [% VERSION %].<br>
+CPANTS data generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Analyse/">Module::CPANTS::Analyse</a>, version [% run.version %], at <b>[% run.date %].</b><br>
+CPANTS and Site maintained by Thomas Klausner - domm@cpan.org
+<p>
+<p>Hosting and bandwidth provided by <a href="http://yi.org"><img src="/static/yi.gif" border="0" align="top" alt="yi.org" width=110 height=30></a>.</p>
+</div>
+
+</body>
+
+</html>

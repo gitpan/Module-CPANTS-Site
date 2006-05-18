@@ -5,13 +5,18 @@ use Getopt::Long;
 use Pod::Usage;
 use Catalyst::Helper;
 
-my $help = 0;
+my $force = 0;
+my $help  = 0;
 
-GetOptions( 'help|?' => \$help );
+GetOptions(
+    'nonew|force' => \$force,
+    'help|?'      => \$help
+ );
 
 pod2usage(1) if ( $help || !$ARGV[0] );
 
-my $helper = Catalyst::Helper->new;
+my $helper = Catalyst::Helper->new( { '.newfiles' => !$force } );
+
 pod2usage(1) unless $helper->mk_component( 'Module::CPANTS::Site', @ARGV );
 
 1;
@@ -25,7 +30,8 @@ module_cpants_site_create.pl - Create a new Catalyst Component
 module_cpants_site_create.pl [options] model|view|controller name [helper] [options]
 
  Options:
-   -help    display this help and exits
+   -force    don't create a .new file where a file to be created exists
+   -help     display this help and exits
 
  Examples:
    module_cpants_site_create.pl controller My::Controller
@@ -44,15 +50,19 @@ module_cpants_site_create.pl [options] model|view|controller name [helper] [opti
 
 Create a new Catalyst Component.
 
+Existing component files are not overwritten.  If any of the component files
+to be created already exist the file will be written with a '.new' suffix.
+This behavior can be suppressed with the C<-force> option.
+
 =head1 AUTHOR
 
-Sebastian Riedel, C<sri\@oook.de>
+Sebastian Riedel, C<sri@oook.de>
 
 =head1 COPYRIGHT
 
 Copyright 2004 Sebastian Riedel. All rights reserved.
 
-This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+This library is free software, you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
