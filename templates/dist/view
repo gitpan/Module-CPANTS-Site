@@ -9,9 +9,9 @@
 </tr>
 <tr>
 <td><b>Kwalitee:</b></td>
-<td>[% dist.kwalitee.kwalitee %] (<a href="/kwalitee/[% dist.dist %]">details</a>)</td>
+<td>[% dist.kwalitee.kwalitee %]% - <a href="/kwalitee/[% dist.dist %]">details</a> </td>
 </tr>
-[% IF c.max_kwalitee == dist.kwalitee.kwalitee %]
+[% IF mck.total_kwalitee == dist.kwalitee.abs_kw %]
 <tr><td colspan=2>This distribution passes all CPANTS tests. Yay!</td></tr>
 [% ELSE %]
 [% kwal = dist.kwalitee %]

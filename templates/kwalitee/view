@@ -13,8 +13,7 @@
     <td colspan=2><a href="/author/[% author.pauseid %]">[% author.name %]</a> ([% author.pauseid%])</td>
 </tr>
 
-[% FOREACH c IN item.columns.sort %]
-[% NEXT IF c == 'id' || c == 'kwalitee' %]
+[% FOREACH c IN mck.all_indicator_names %]
 <tr>
     <td><b><a href="/kwalitee/shortcoming?name=[% c %]">[% c %]</a></b></td>
     <td class="[% item.$c ? 'ok' : 'not_ok' %]" align="center">[% IF item.$c %]ok[% ELSE %]not&nbsp;ok[% END %]</td>

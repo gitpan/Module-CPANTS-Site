@@ -1,8 +1,17 @@
 #-----------------------------------------------------------------
 # Changes for Module::CPANTS::Site
-# $Rev: 4033 $
-# $Date: 2006-05-18T20:04:39.274245Z $ 
+# $Rev: 4196 $
+# $Date: 2006-07-19T22:40:48.548561Z $ 
 #-----------------------------------------------------------------
+
+
+0.61    2005-07-20
+    - removed pod errors
+    - dist housekeeping
+    - Module::Build instead of Module::Install
+    - several minor wording changes
+    - added News
+    - added rel_kwalitee
 
 
 0.60    2005-05-18

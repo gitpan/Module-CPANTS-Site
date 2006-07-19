@@ -64,7 +64,7 @@ sub few : Local {
     my ($self,$c)=@_;
     $c->stash->{list}=$c->model('DBIC::Author')->search(
         {
-             num_dists=>{'<',5},
+             num_dists=>[{'<',5,'>',0}]
         },
         {
             order_by=>'average_kwalitee desc,num_dists desc,pauseid',
@@ -96,11 +96,6 @@ See L<Module::CPANTS::Site>
 Catalyst component.
 
 =head1 METHODS
-
-=over 4
-
-=item default
-
 
 =head1 AUTHOR
 

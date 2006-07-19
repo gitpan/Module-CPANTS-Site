@@ -46,14 +46,6 @@ See L<Module::CPANTS::Site>
 
 Catalyst component.
 
-=head1 METHODS
-
-=over 4
-
-=item default
-
-=cut
-
 =head1 AUTHOR
 
 domm,,,

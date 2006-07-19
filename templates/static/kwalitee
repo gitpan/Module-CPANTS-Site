@@ -20,17 +20,20 @@
 
 <h3>Current Kwalitee Indicators</h3>
 
-<p><b>Total Kwalitee available: [% total %]</b></p>
+<p><b>Available Kwalitee: [% mck.available_kwalitee %] (including optional metrics: [% mck.total_kwalitee %])</b></p>
 
 <p>If you want to discuss Kwalitee indicators or suggest new ones, please use the <a href="http://lists.cpan.org/showlist.cgi?name=perl-qa">perl-qa</a> list.</p>
 
 <dl>
-[% FOREACH k IN kwalitee %]
-<dt>[% k.name %] </dt>
-<dd><b>Shortcoming:</b> [% k.error %]<br>
+[% FOREACH k IN mck.get_indicators %]
+<dt>[% k.name %] [% IF k.is_extra %](optional)[% END%]
+ </dt>
+<dd>
+[% IF k.is_extra %]This metric is optional.<br>[% END%]
+<b>Shortcoming:</b> [% k.error %]<br>
 <b>Remedy:</b> [% k.remedy %]<br>
 <b>Defined in:</b> [% k.defined_in %]<br>
-<a href="/dist/shortcoming?metric=[% k.name %]">Show dists with this shortcoming</a>
+<a href="/dist/shortcoming?metric=[% k.name %]">Show failing dists</a>
 </dd>
 
 [% END%]

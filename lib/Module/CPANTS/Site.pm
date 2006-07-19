@@ -4,12 +4,9 @@ use strict;
 use warnings;
 use Catalyst qw/ConfigLoader Static::Simple/;
 
-our $VERSION = '0.60';
+our $VERSION = '0.61';
 
 __PACKAGE__->setup;
-
-
-'listening to: Nightmares on Wax - in a space outta sound';
 
 
 sub default : Private {
@@ -19,9 +16,6 @@ sub default : Private {
 
 sub kwalitee : Path('kwalitee.html') {
     my ( $self, $c ) = @_;
-    my $kw=Module::CPANTS::Site::Model::Kwalitee->kwalitee;
-    $c->stash->{kwalitee}=$kw->get_indicators;
-    $c->stash->{total}=$kw->available_kwalitee;
     $c->stash->{template}='static/kwalitee';
 }
 sub graphs : Path('graphs.html') {
@@ -29,18 +23,23 @@ sub graphs : Path('graphs.html') {
     $c->stash->{template}='static/graphs';
 }
 
+sub news : Path('news.html') {
+    my ( $self, $c ) = @_;
+    $c->stash->{template}='static/news';
+}
+
 sub end : Private {
     my ( $self, $c ) = @_;
 
     $c->stash->{VERSION}=$VERSION;
-
+    my $kw=Module::CPANTS::Site::Model::Kwalitee->kwalitee;
     my $rs=$c->model('DBIC::Run')->search({},
         {
             order_by=>'date desc',
             rows=>1,
         });
     $c->stash->{run}=$rs->first;
-    
+    $c->stash->{mck}=$kw;
     $c->forward( $c->view('') ) unless $c->stash->{'is_redirect'} || $c->response->body;
 }
 
@@ -56,6 +55,8 @@ sub max_kwalitee {
     return $rs->first->kwalitee;
 }
 
+
+'listening to: Nightmares on Wax - in a space outta sound';
 
 __END__
 

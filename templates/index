@@ -18,8 +18,25 @@
 <p>The CPANTS SQLite database is currently not available, as I moved to postgres. Use this site instead to:</p>
 <ul>
 <li>Search for <a href="/author/search">authors</a> and <a href="/dist/search">distributions</a>.
-<li>Take a look at the <a href="highscores">various</a> <a href="graphs.html">reports</a> generated at this site.
+<li>Take a look at the <a href="highscores/">various</a> <a href="graphs.html">reports</a> generated at this site.
 </ul>
+
+<h3><a href="/news.html">News</a></h3>
+
+<dl>
+<dt>2006-07-19</dt>
+<dd>
+Added News section<br>
+New metric: <code>has_working_buildtool</code>. Thanks to <a href="http://steffen-mueller.net">Steffen Müller</a> for suggesting & implementing it!
+Re-indexed the whole of CPAN.
+</dd>
+<dt>2006-07-18</dt>
+<dd>
+Added support for optional metrics (eg <code>is_prereq</code>).<br>
+Changed Kwalitee from absolut to relative values (i.e. percentages)<br>
+Changed ranking in CPANTS game to only use non-optional metrics. Now releasing a new distribution (which fulfills all core metrics) won't lower owns rank.
+</dd>
+</dl>
 
 
 <h3>Limitations</h3>

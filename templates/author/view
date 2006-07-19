@@ -22,8 +22,7 @@
 
 <table>
 <tr><td>Dist</td><td>Kwalitee</td>
-[% FOREACH kw IN item.dists.0.kwalitee.columns.sort %]
-[% NEXT IF kw == 'id' || kw == 'dist' %]
+[% FOREACH kw IN mck.all_indicator_names.sort %]
 <td style="text"><a title="[% kw %]" href="/kwalitee/shortcoming?name=[% kw %]">#</a></td>
 [% END %]
 </tr>
@@ -33,8 +32,7 @@
 <td><a href="/dist/[% d.dist %]">[% d.dist %]</td>
 <td align="center">[% kwal.kwalitee %]</td>
 
-[% FOREACH kw IN kwal.columns.sort %]
-[% NEXT IF kw == 'id' || kw == 'dist' %]
+[% FOREACH kw IN mck.all_indicator_names.sort %]
 <td class="[% kwal.$kw ? 'ok' : 'not_ok' %]" align="center" title="[% kw %]">[% kwal.$kw ? '+' : '-' %]</td>
 [% END %]
 
