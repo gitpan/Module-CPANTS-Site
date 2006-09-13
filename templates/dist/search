@@ -1,14 +1,14 @@
 <h1>Search distributions</h1>
 
 <form action="/dist/search">
-<p>Please enter a distribution name: <input type="text" name="dist" size="20" value=[% c.req.param('dist') %]> <input type="submit" value="search"></p>
+<p>Please enter a distribution name: <input type="text" name="dist" size="20" value=[% term %]> <input type="submit" value="search"></p>
 
 [% IF list %]
 [% pager = list.pager %]
 
-[% nav_pager = INCLUDE 'widgets/pager' action='search' params="dist=" _ c.req.param('dist') %]
+[% nav_pager = INCLUDE 'widgets/pager' action='search' params="dist=" _ term %]
 
-<p><b>[% pager.total_entries %] Distribution[% 's' IF pager.total_entries > 1 %] matching '<code>[% c.req.param('dist') %]</code>':</b></p> 
+<p><b>[% pager.total_entries %] Distribution[% 's' IF pager.total_entries > 1 %] matching '<code>[% term %]</code>':</b></p> 
 
 [% nav_pager %]
 

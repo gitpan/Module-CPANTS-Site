@@ -5,13 +5,15 @@ use warnings;
 use base 'Catalyst::Controller';
 
 sub search : Local {
-    my ($self,$c) = @_;
+    my ($self,$c,$term) = @_;
     $c->stash->{template} = 'dist/search';
-
-    if (my $term=$c->req->param('dist')) {
+    $term ||= $c->req->param('dist');
+    $c->log->debug("search dist for $term");
+    if ($term) {
         $term=~s/::/-/g;
         
         # todo: ignore case in searches
+        $c->stash->{term}=$term;
         $c->stash->{list}=$c->model('DBIC::Dist')->search(
             {
                 dist=>{'ilike'=>$term.'%'},
@@ -29,21 +31,20 @@ sub view : Regex('^dist$') {
     my ($self,$c,$distname) = @_;
     
     return $c->forward('/dist/search') unless $distname;
-
     my $dist;
     if ($distname=~/^\d+$/) {
         $dist=$c->model('DBIC::Dist')->find($distname);
     } else {
         $dist=$c->model('DBIC::Dist')->search({dist=>$distname});
         if ($dist == 1) {
-            $dist=$dist->next 
+            $dist=$dist->next;
         } else {
         # TODO
         #my @mod=Module::CPAN->search(module=>$distname_colons);
         #if (@mod == 1) {
         #    return $c->res->redirect("/dist/".$mod[0]->dist->dist_without_version);
         #}
-            $c->forward('/dist/search?dist='.$distname);
+            $c->detach('/dist/search',[$distname]);
         }
     }
     $c->stash->{dist}=$dist;
@@ -60,8 +61,8 @@ sub view : Regex('^dist$') {
         'prereq',
         {},
         {
-            order_by=>'requires',
-            # prefetch=>[qw(dist)],
+            order_by=>'me.requires',
+            prefetch=>[qw(dist)],
         }
     );
     $c->stash->{template} = 'dist/view';
@@ -77,7 +78,7 @@ sub shortcoming : Local {
             },
             {
                 join=>[qw(kwalitee)],
-                order_by=>'dist',
+                order_by=>'me.dist',
                 page=>$c->request->param('page') || 1,
                 rows=>40,
             }

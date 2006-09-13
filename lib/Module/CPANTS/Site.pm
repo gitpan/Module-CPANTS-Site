@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Catalyst qw/ConfigLoader Static::Simple/;
 
-our $VERSION = '0.61';
+our $VERSION = '0.62';
 
 __PACKAGE__->setup;
 
