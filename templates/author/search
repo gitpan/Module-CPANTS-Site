@@ -1,12 +1,12 @@
 <h1>Search authors</h1>
 [% pager = list.pager %]
 <form action="/author/search">
-<p>Please enter a PAUSE ID: <input type="text" name="pauseid" size="10" value=[% c.req.param('pauseid') %]> <input type="submit" value="search"></p>
+<p>Please enter a PAUSE ID: <input type="text" name="pauseid" size="10" value=[% term %]> <input type="submit" value="search"></p>
 
 [% IF list %]
-<p><b>[% pager.total_entries %] Author[% 's' IF pager.total_entries > 1 %] matching  '<code>[% c.req.param('pauseid') %]</code>':</b> </p>
+<p><b>[% pager.total_entries %] Author[% 's' IF pager.total_entries > 1 %] matching  '<code>[% term %]</code>':</b> </p>
 
-[% nav_pager = INCLUDE 'widgets/pager' action='search' params="pauseid=" _ c.param('pauseid') %]
+[% nav_pager = INCLUDE 'widgets/pager' action='search' params="pauseid=" _ term %]
 [% nav_pager %]
 
 <ul>

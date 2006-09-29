@@ -1,12 +1,13 @@
 package Module::CPANTS::Site::View::TT;
 
 use strict;
-use base 'Catalyst::View::TT';
+use warnings;
 
-__PACKAGE__->config({
-        WRAPPER=>'wrapper',
-        INCLUDE_PATH=>Module::CPANTS::Site->config->{home}.'/templates',
-});
+use base qw( Catalyst::View::TT );
+
+1;
+
+__END__
 
 =head1 NAME
 
@@ -22,7 +23,7 @@ TT View Component.
 
 =head1 AUTHOR
 
-domm,,,
+Thomas Klausner, <domm@cpan.org>
 
 =head1 LICENSE
 
@@ -30,5 +31,3 @@ This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
-
-1;

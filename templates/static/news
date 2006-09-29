@@ -1,8 +1,24 @@
+<h2>News</h2>
+
 <dl>
+<dt>2006-09-28: Cronjob</dt>
+<dd>I finally managed to set up a working cronjob for CPANTS. You can expect new data each day around 02:45 EDT. Only newly uploaded dists will be checked daily. I will only do a full run (which takes some hours) if there's a change to the metrics.</dd>
+
+<dt>2006-09-26: Revamped Website</dt>
+<dd>Thanks to the incredibly helpful <a href="http://search.cpan.org/~bricas/">Brian Cassidy</a> the site is now working much better than before. He submitted several patches that cleaned up my horrible Catalyst code in Module::CPANTS::Site.</dd>
+
+<dt>2006-09-13: has_license</dt>
+<dd>A new metric, implemented by <a href="http://www.szabgab.com/">Gabor Szabo</a>, has_license checks if there is a license specified in META.yml. This metric will be soon enhances to also look in other places for a license.</dt>
+
+<dt>2006-09-05: New metrics</dt>
+<dd>During YAPC::Europe 2007 I did a small CPANTS hackathon, which resulted in several new metrics: manifest_matches_dist, buildtool_not_executable and has_exampel (which is an optional metric).<br>
+I also changed the authors page a bit so: optional metrics are now clearly marked as such.
+</dd>
+
 <dt>2006-07-19</dt>
 <dd>
 Added News section<br>
-New metric: <code>has_working_buildtool</code>. Thanks to <a href="http://steffen-mueller.net">Steffen Müller</a> for suggesting & implementing it!
+New metric: <code>has_working_buildtool</code>. Thanks to <a href="http://steffen-mueller.net">Steffen MÃ¼ller</a> for suggesting & implementing it!
 Re-indexed the whole of CPAN.
 </dd>
 <dt>2006-07-18</dt>

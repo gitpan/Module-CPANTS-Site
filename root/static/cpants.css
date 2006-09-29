@@ -2,8 +2,10 @@ body,table,tr,td {
   font-family:helvetica,sans-serif;
   font-size:14px;
   font-weight:normal;
-  background-color: #FFF;
 
+}
+body {
+  background-color: #FFF;
 }
 
 .top { 
@@ -95,3 +97,4 @@ color: #fff;
 .grey { background-color:#ddd }
 .ok { background-color:#0f0 }
 .not_ok { background-color:#f00 }
+.opt_not_ok { background-color:#f80 }

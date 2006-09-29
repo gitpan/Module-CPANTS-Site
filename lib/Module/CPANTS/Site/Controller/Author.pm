@@ -2,41 +2,58 @@ package Module::CPANTS::Site::Controller::Author;
 
 use strict;
 use warnings;
-use base 'Catalyst::Controller';
 
+use base qw( Catalyst::Controller );
 
 sub search : Local {
-    my ($self,$c) = @_;
-    $c->stash->{template} = 'author/search';
+    my ( $self, $c, $term ) = @_;
+    
+    $term ||= $c->req->param( 'pauseid' );
+ 
+    return unless $term;
 
-    if (my $term=$c->req->param('pauseid')) {
-        $c->stash->{list}=$c->model('DBIC::Author')->search_like(
-            {
-                pauseid=>uc($term).'%',
-            },
-            {
-                order_by=>'pauseid ASC',
-                page=>$c->request->param('page') || 1,
-                rows=>20,
-            });
+    $c->log->debug( "search author for $term" ) if $c->debug;
+    
+    $c->stash->{ term } = $term;
+    $c->stash->{ list } = $c->model( 'DBIC::Author' )->search_like(
+        {
+            pauseid => uc( $term ) . '%',
+        },
+        {
+            order_by => 'pauseid ASC',
+            page     => $c->request->param( 'page' ) || 1,
+            rows     => 20,
+        }
+    );
+}
+
+sub view : Path {
+    my ( $self, $c, $author ) = @_;
+
+    unless( $author ) {
+        $c->stash->{ template } = 'author/search';
+        return;
     }
+
+    my $item = $c->model( 'DBIC::Author' )->search(
+        { pauseid => $author }
+    )->first;
+
+    if ( !$item ) {
+        $c->stash->{ template } = 'author/search';
+        $c->detach( 'search', [ $author ] );
+    }
+
+    $c->stash->{ item } = $item;
 }
 
-sub view : Regex('^author$') {
-    my ($self,$c,$author) = @_;
-    $c->stash->{template} = 'author/view';
-    
-    return $c->forward('/author/search') unless $author;
-    
-    my $a=$c->model('DBIC::Author')->search({pauseid=>$author});
-    
-    $c->stash->{item}=$a->next;
-}
+1;
 
+__END__
 
 =head1 NAME
 
-Module::CPANTS::Site::C::Author - Catalyst component
+Module::CPANTS::Site::Controller::Author - Catalyst component
 
 =head1 SYNOPSIS
 
@@ -46,9 +63,12 @@ See L<Module::CPANTS::Site>
 
 Catalyst component.
 
+=head1 METHODS
+
+
 =head1 AUTHOR
 
-domm,,,
+Thomas Klausner, <domm@cpan.org>
 
 =head1 LICENSE
 
@@ -57,4 +77,3 @@ it under the same terms as perl itself.
 
 =cut
 
-1;

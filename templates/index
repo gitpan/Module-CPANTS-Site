@@ -21,21 +21,20 @@
 <li>Take a look at the <a href="highscores/">various</a> <a href="graphs.html">reports</a> generated at this site.
 </ul>
 
+<p>Due to some strange Catalyst/DBIx::Class errors, this site is down from time to time. A reload helps, but not always. I'm trying to figure out what's the problem...</p>
+
 <h3><a href="/news.html">News</a></h3>
 
 <dl>
-<dt>2006-07-19</dt>
-<dd>
-Added News section<br>
-New metric: <code>has_working_buildtool</code>. Thanks to <a href="http://steffen-mueller.net">Steffen Müller</a> for suggesting & implementing it!
-Re-indexed the whole of CPAN.
-</dd>
-<dt>2006-07-18</dt>
-<dd>
-Added support for optional metrics (eg <code>is_prereq</code>).<br>
-Changed Kwalitee from absolut to relative values (i.e. percentages)<br>
-Changed ranking in CPANTS game to only use non-optional metrics. Now releasing a new distribution (which fulfills all core metrics) won't lower owns rank.
-</dd>
+<dt>2006-09-28: Cronjob</dt>
+<dd>I finally managed to set up a working cronjob for CPANTS. You can expect new data each day around 02:45 EDT. Only newly uploaded dists will be checked daily. I will only do a full run (which takes some hours) if there's a change to the metrics.</dd>
+
+<dt>2006-09-26: Revamped Website</dt>
+<dd>Thanks to the incredibly helpful <a href="http://search.cpan.org/~bricas/">Brian Cassidy</a> the site is now working much better than before. He submitted several patches that cleaned up my horrible Catalyst code in Module::CPANTS::Site.</dd>
+
+<dt>2006-09-13: has_license</dt>
+<dd>A new metric, implemented by <a href="http://www.szabgab.com/">Gabor Szabo</a>, has_license checks if there is a license specified in META.yml. This metric will be soon enhances to also look in other places for a license.</dt>
+
 </dl>
 
 
@@ -51,6 +50,7 @@ Changed ranking in CPANTS game to only use non-optional metrics. Now releasing a
 <p>Various talks I held on CPANTS at various Conferences / Workshops:</p>
 
 <ul>
+<li><a href="http://domm.plix.at/talks/2006_birmingham_cpants">YAPC::Europe 2006, Birmingham</a>
 <li><a href="http://domm.zsi.at/talks/2005_braga_cpants">YAPC::Europe 2005, Braga</a>
 <li><a href="http://domm.zsi.at/talks/2005_brussels_cpants">FOSDEM 2005, Brussels</a>
 <li><a href="http://domm.zsi.at/talks/2004_belfast_cpants">YAPC::Europe 2004, Belfast</a>

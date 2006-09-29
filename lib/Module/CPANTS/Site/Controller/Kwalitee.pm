@@ -2,30 +2,24 @@ package Module::CPANTS::Site::Controller::Kwalitee;
 
 use strict;
 use warnings;
-use base 'Catalyst::Controller';
+
+use base qw( Catalyst::Controller );
 
 sub shortcoming : Local {
-    my ($self,$c) = @_;
-    my $metric=$c->req->param('name');
-
-    my $kw=Module::CPANTS::Site::Model::Kwalitee->kwalitee;
+    my ( $self, $c ) = @_;
+    my $metric       = $c->req->param( 'name' );
+    my $kwalitee     = $c->model( 'Kwalitee' );
     
-    $c->stash->{indicator}=$kw->get_indicators_hash->{$metric};
-    $c->stash->{template}='kwalitee/shortcoming';
+    $c->stash->{ indicator } = $kwalitee->get_indicators_hash->{ $metric };
 }
 
-
-
-sub view : Regex('^kwalitee$') {
-    my ($self,$c,$distname) = @_;
+sub view : Path {
+    my ( $self, $c, $distname ) = @_;
     
-    my $dist=$c->model('DBIC::Dist')->search({dist=>$distname});
-    if ($dist == 1) {
-        $c->stash->{dist}=$dist->next;
-    }
-    $c->stash->{template} = 'kwalitee/view';
-}
+    my $dist = $c->model( 'DBIC::Dist' )->search( { dist => $distname } );
 
+    $c->stash->{ dist } = $dist->first;
+}
 
 'listening to: kids during judo training';
 
@@ -56,5 +50,3 @@ This library is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
-
-1;
