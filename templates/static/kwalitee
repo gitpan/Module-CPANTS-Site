@@ -26,7 +26,7 @@
 
 <dl>
 [% FOREACH k IN mck.get_indicators %]
-<dt>[% k.name %] [% IF k.is_extra %](optional)[% END%]
+<dt>[% k.name %] [% k.fake %] [% IF k.is_extra %](optional)[% END%]
  </dt>
 <dd>
 [% IF k.is_extra %]This metric is optional.<br>[% END%]

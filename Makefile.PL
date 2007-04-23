@@ -12,6 +12,8 @@ WriteMakefile
                            'Catalyst::Model::DBIC::Schema' => '0.16',
                            'Module::CPANTS::Analyse' => '0.60',
                            'Catalyst::Plugin::Static::Simple' => '0.14',
+                           'DBD::Pg' => '1.49',
+                           'Catalyst::Plugin::ConfigLoader' => '0.11',
                            'Catalyst' => '5.7000',
                            'Module::CPANTS::ProcessCPAN' => '0.60',
                            'DBIx::Class' => '0.07000'

@@ -44,7 +44,7 @@ document.getElementById('top').style.backgroundColor="#ff7300";
 
 
 </tr>
-[% FOREACH d IN item.dists %]
+[% FOREACH d IN item.dists( {}, { 'order_by' => 'dist' } ) %]
 [% kwal = d.kwalitee %]
 <tr>
 <td><a href="/dist/[% d.dist %]">[% d.dist %]</td>
@@ -61,6 +61,18 @@ document.getElementById('top').style.backgroundColor="#ff7300";
 </tr>
 [% END %]
 </table>
+
+<p>
+<img src="/static/graphs/[% item.pauseid %]_dists.png" alt="Number of Dists for [% item.pauseid %]">
+</p>
+
+<p>
+<img src="/static/graphs/[% item.pauseid %]_kw.png" alt="Average Kwalitee for [%
+item.pauseid %]">
+
 [% ELSE %]
 <p>Invalid PAUSE ID specified.</p>
 [% END %]
+
+
+

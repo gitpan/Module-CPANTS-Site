@@ -2,41 +2,49 @@
 
 <p>Please take all the information presented here with a grain of salt. The methods used to test the distributions are a bit flakey, and some of the Kwalitee indicators are still subjects of discussions (which should happen on the <a href="http://lists.cpan.org/showlist.cgi?name=perl-qa">perl-qa</a> list).</p>
 
-<p>Please report bugs etc via <a href="https://rt.cpan.org/NoAuth/Bugs.html?Dist=Module-CPANTS-Analyse">rt.perl.org</a></p>
+<h3>Why don't you...</h3>
 
-<!--<h3>Current CPANTS SQLite DB</h3>
-
-<p>You can download the latest CPANTS data generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Generator/">Module::CPANTS::Generator</a>, version [% generator_version %], at [% run_date %], here:
 <ul>
-<li><a href='/i/cpants.db.bz2'>cpants.db.bz2</a> (SQLite 3.0)
-<li><a href='/db_schema.html'>SQL schema of the DB</a>
-</ul>
-</p>
-
-<p>New data will be available each Sunday morning (CET).</p>
--->
-<p>The CPANTS SQLite database is currently not available, as I moved to postgres. Use this site instead to:</p>
-<ul>
-<li>Search for <a href="/author/search">authors</a> and <a href="/dist/search">distributions</a>.
-<li>Take a look at the <a href="highscores/">various</a> <a href="graphs.html">reports</a> generated at this site.
+<li>Search for <a href="/author/search">authors</a> or <a href="/dist/search">distributions</a>.
+<li>Take a look at the various <a href="graphs.html">reports</a> generated at this site.
+<li>Admire the top gamers of the <a href="highscores">CPANTS game</a>. 
+<li>Download the latest CPANTS data as a SQLite DB from here
+<blockquote><a href='/static/sqlite/cpants_all.db.gz'>cpants_all.db.gz</a>
+</blockquote>
 </ul>
 
-<p>Due to some strange Catalyst/DBIx::Class errors, this site is down from time to time. A reload helps, but not always. I'm trying to figure out what's the problem...</p>
+<h3>News</h3>
 
-<h3><a href="/news.html">News</a></h3>
+<dt>2007-04-23: New releases<dt>
+<dd>
+I've fixed lots of bugs reported via RT and email. Thanks for the hints and patches! Quality of CPANTS data should be a bit better now...
+</dd>
 
-<dl>
-<dt>2006-09-28: Cronjob</dt>
-<dd>I finally managed to set up a working cronjob for CPANTS. You can expect new data each day around 02:45 EDT. Only newly uploaded dists will be checked daily. I will only do a full run (which takes some hours) if there's a change to the metrics.</dd>
+<dt>2007-04-02: Old metrics<dt>
+<dd>Now that April 1sth is over, we're back to the regular metrics...</dd>
 
-<dt>2006-09-26: Revamped Website</dt>
-<dd>Thanks to the incredibly helpful <a href="http://search.cpan.org/~bricas/">Brian Cassidy</a> the site is now working much better than before. He submitted several patches that cleaned up my horrible Catalyst code in Module::CPANTS::Site.</dd>
+<dt>2007-04-01: New metrics</dt>
+<dd>Thanks to Catalyst & DBIx::Class I finished my <a
+href="http://oe1.orf.at">$big_project</a> a bit early. I
+used this time to implement a few long-pending metrics:
 
-<dt>2006-09-13: has_license</dt>
-<dd>A new metric, implemented by <a href="http://www.szabgab.com/">Gabor Szabo</a>, has_license checks if there is a license specified in META.yml. This metric will be soon enhances to also look in other places for a license.</dt>
+<ul>
+<li>docs_make_sense
+<li>mentions_kwalitee
+<li>uses_version_control
+<li>reuses_code
+<li>uses_recursion
+<li>correct_speling
+<li>nice_code_layout
+</ul>
+
+You can find a more detailed description <a
+href="/kwalitee_april_1st_2007.html">here</a><br><br>
+Happy gaming!</dd>
 
 </dl>
 
+<a href="/news.html">Not news anymore...</a>
 
 <h3>Limitations</h3>
 
@@ -60,3 +68,4 @@
 
 <p><a href="http://schwern.org/~schwern/talks/CPANTS/">Slides</a> of the talk given by Michael G. Schwern at YAPC::Europe 2001 in Amsterdam.</p>
 
+<p>Please report bugs etc via <a href="https://rt.cpan.org/NoAuth/Bugs.html?Dist=Module-CPANTS-Analyse">rt.perl.org</a></p>

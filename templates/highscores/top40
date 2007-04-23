@@ -6,7 +6,7 @@
 
 <h1>[% pager.total_entries %] [% titles.$top40type %]</h1>
 
-<p>This list is in now way ment as a list of 'best' or 'good' Perl programmers. It is a list of good CPANTS players. Also note that <b>optional metrics</b> (like <code>is_prereq</code>) are <b>not</b> considered in this statistic.</p>
+<p>This list is in no way meant as a list of 'best' or 'good' Perl programmers. It is a list of good CPANTS players. Also note that <b>optional metrics</b> (like <code>is_prereq</code>) are <b>not</b> considered in this statistic.</p>
 </p>
 
 <table cellspacing=5>

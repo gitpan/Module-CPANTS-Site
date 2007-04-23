@@ -11,6 +11,7 @@ sub search : Local {
     $term ||= $c->req->param( 'pauseid' );
  
     return unless $term;
+    $term=~s/\s//g;
 
     $c->log->debug( "search author for $term" ) if $c->debug;
     

@@ -24,6 +24,10 @@
 [% INCLUDE 'widgets/distlinks' IF dist %]
 
 <div class="content">
+
+<!--<h1>CPANTS --force run in progress --- data is not valid at the moment</h1>
+-->
+
 [% content %]
 </div>
 
@@ -33,7 +37,9 @@ Site generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Site/">Mo
 CPANTS data generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Analyse/">Module::CPANTS::Analyse</a>, version [% run.version %], at <b>[% run.date %].</b><br />
 CPANTS and Site maintained by Thomas Klausner - domm@cpan.org
 <p>
-<p>Hosting and bandwidth provided by <a href="http://yi.org"><img src="/static/yi.gif" border="0" align="top" alt="yi.org" width="110" height="30"></a>.</p>
+<p>Hosting and bandwidth provided by <a href="http://hexten.net"><img
+src="/static/hexten.gif" border="0" align="top" alt="Hexten" width="156"
+height="32"></a>.</p>
 </div>
 
 </body>

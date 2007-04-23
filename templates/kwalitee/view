@@ -39,3 +39,8 @@
 <p>Invalid distname specified.</p>
 [% END %]
 
+<p>
+<img src="/static/graphs/[% dist.dist %].png" alt="Stats for [%
+dist.dist %]">
+</p>
+
