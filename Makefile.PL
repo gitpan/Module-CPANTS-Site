@@ -9,14 +9,15 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Module/CPANTS/Site.pm',
           'PREREQ_PM' => {
                            'Catalyst::View::TT' => '0.23',
+                           'File::HomeDir' => '0.66',
+                           'DBD::SQLite' => '1.14',
                            'Catalyst::Plugin::Static::Simple' => '0.14',
                            'version' => '0.73',
-                           'DBD::Pg' => '1.49',
                            'Catalyst::Plugin::ConfigLoader' => '0.11',
                            'Catalyst::Model::DBIC::Schema' => '0.16',
-                           'Module::CPANTS::Analyse' => '0.60',
+                           'Module::CPANTS::Analyse' => '0.75',
                            'Catalyst' => '5.7000',
-                           'Module::CPANTS::ProcessCPAN' => '0.60',
+                           'Module::CPANTS::ProcessCPAN' => '0.70',
                            'DBIx::Class' => '0.07000'
                          }
         )
