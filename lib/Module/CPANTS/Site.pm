@@ -10,7 +10,8 @@ my $home=Module::CPANTS::ProcessCPAN::ConfigData->config('home');
 my $db_user=Module::CPANTS::ProcessCPAN::ConfigData->config('db_user');
 my $db_pwd=Module::CPANTS::ProcessCPAN::ConfigData->config('db_pwd');
 $Template::Directive::WHILE_MAX=3000;
-use version; our $VERSION = version->new('0.73');
+use version; our $VERSION = version->new('0.75');
+
 
 __PACKAGE__->config(
     name    => 'Module::CPANTS::Site',
@@ -44,6 +45,9 @@ sub end : Private {
     $c->stash->{ VERSION } = $VERSION;
     $c->stash->{ run     } = $rs->first;
     $c->stash->{ mck     } = $kw;
+    $c->stash->{ perlversion } = $];
+
+    $c->stash->{cpants_is_analysing}=1 if (-e catfile($home,'cpants_is_analysing'));
 
     $c->forward( $c->view('') ) unless $c->stash->{'is_redirect'} || $c->response->body;
 }

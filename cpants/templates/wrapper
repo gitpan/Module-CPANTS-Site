@@ -14,6 +14,7 @@
 <a href='/news.html'>News</a> |
 <a href='/kwalitee.html'>Kwalitee</a> |
 <a href='/highscores/'>The CPANTS game</a> |
+<a href='/stats.html'>Stats</a> |
 <a href='/graphs.html'>Graphs</a> &nbsp; &nbsp; || &nbsp; &nbsp;
 <a href='/dist/search'>Distributions</a> | 
 <a href='/author/search'>Authors</a> 
@@ -21,12 +22,18 @@
 <span style="color:#f00">ALPHA VERSION - Hic sunt dracones!</span>
 </div>
 
+[% USE Number.Format %]
+
 [% INCLUDE 'widgets/distlinks' IF dist %]
+
+[% IF cpants_is_analysing %]
+<div class="warning">
+CPANTS is currently analysing dists. Results might be inconsistent!
+</div>
+[% END %]
 
 <div class="content">
 
-<!--<h1>CPANTS --force run in progress --- data is not valid at the moment</h1>
--->
 
 [% content %]
 </div>
@@ -34,7 +41,7 @@
 <div class="footer">
 <p>
 Site generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Site/">Module::CPANTS::Site</a> [% VERSION %].<br />
-CPANTS data generated with <a href="http://search.cpan.org/dist/Module-CPANTS-Analyse/">Module::CPANTS::Analyse</a> [% run.mcanalyse_version %] and <a href="http://search.cpan.org/dist/Module-CPANTS-ProcessCPAN/">Module::CPANTS::ProcessCPAN</a> [% run.mcprocess_version %], at <b>[% run.date %].</b><br />
+CPANTS data generated with Perl [% perlversion %], <a href="http://search.cpan.org/dist/Module-CPANTS-Analyse/">Module::CPANTS::Analyse</a> [% run.mcanalyse_version %] and <a href="http://search.cpan.org/dist/Module-CPANTS-ProcessCPAN/">Module::CPANTS::ProcessCPAN</a> [% run.mcprocess_version %], at <b>[% run.date %].</b><br />
 CPANTS and Site maintained by Thomas Klausner - domm@cpan.org
 <p>
 <p>Hosting and bandwidth provided by <a
