@@ -3,23 +3,20 @@ package Module::CPANTS::Site::Controller::Dist;
 use strict;
 use warnings;
 
-use base qw( Catalyst::Controller );
+use base qw( Catalyst::Controller::BindLex );
 
 sub search : Local {
-    my ( $self, $c, $term ) = @_;
-
-    $term ||= $c->req->param( 'dist' );
+    my ( $self, $c, $search ) = @_;
+    my $term : Stashed = $search || $c->req->param( 'dist' );
 
     return unless $term;
 
     $c->log->debug( "search dist for $term" ) if $c->debug;
     $term=~s/::/-/g;
         
-    # todo: ignore case in searches
-    $c->stash->{ term } = $term;
-    $c->stash->{ list } = $c->model( 'DBIC::Dist' )->search(
+    my $list : Stashed = $c->model( 'DBIC::Dist' )->search(
         {
-            dist => { LIKE => $term . '%' },
+            dist => { ILIKE =>  '%' . $term . '%' },
         },
         {
             order_by => 'dist ASC',
@@ -27,12 +24,16 @@ sub search : Local {
             rows     => 20,
         }
     );
+    if ($list == 1) {
+        $c->response->redirect($c->uri_for('/dist/overview',$list->first->dist));
+    }
 }
 
 # for backward compat / google
+
 sub view : Path {
     my ( $self, $c, $distname ) = @_;
-    $c->res->redirect('/dist/overview/'.$distname);
+    $c->res->redirect($c->uri_for('overview',$distname));
 }   
 
 sub overview : Local {
@@ -43,50 +44,21 @@ sub overview : Local {
 sub kwalitee : Local {
     my ( $self, $c, $distname ) = @_;
     $c->forward('get_dist',[ $distname ]);
-    $c->stash->{ kwalitee_hash } = $c->model( 'Kwalitee' )->get_indicators_hash;
+    my $kwalitee_hash : Stashed = $c->model( 'Kwalitee' )->get_indicators_hash;
 }
 
 sub prereq : Local {
     my ( $self, $c, $distname ) = @_;
     my $dist = $c->forward('get_dist',[ $distname ]);
-    $c->stash->{ prereqs } = $dist->search_related(
-        'prereq',
-        { is_prereq => 1},
-        {
-            order_by => 'me.in_dist,me.requires',
-            prefetch => [ qw( dist ) ],
-        }
-    );
-    $c->stash->{ build_prereqs } = $dist->search_related(
-        'prereq',
-        { is_build_prereq => 1},
-        {
-            order_by => 'me.in_dist,me.requires',
-            prefetch => [ qw( dist ) ],
-        }
-    );
-    $c->stash->{ optional_prereqs } = $dist->search_related(
-        'prereq',
-        { is_optional_prereq => 1},
-        {
-            order_by => 'me.in_dist,me.requires',
-            prefetch => [ qw( dist ) ],
-        }
-    );
-
+    $c->stash->{ prereqs } = $dist->get_prereqs();
+    $c->stash->{ build_prereqs } = $dist->get_build_prereqs();
+    $c->stash->{ optional_prereqs } = $dist->get_optional_prereqs();
 }
 
 sub used_by : Local {
     my ( $self, $c, $distname ) = @_;
     my $dist = $c->forward('get_dist',[ $distname ]);
-    $c->stash->{ used_by } = $dist->search_related(
-        'requiring',
-        { },
-        {
-            order_by => 'dist.dist',
-            prefetch => [ qw( dist ) ],
-        }
-    );
+    $c->stash->{ used_by } = $dist->used_by;
 }
 
 sub metadata : Local {
@@ -104,46 +76,83 @@ sub errors : Local {
     $c->forward('get_dist',[ $distname ]);
 }
 
+sub external : Local {
+    my ( $self, $c, $distname ) = @_;
+    $c->forward('get_dist',[ $distname ]);
+}
+
 sub get_dist : Private {
     my ( $self, $c, $distname ) = @_;
-   
+
     unless( $distname ) {
         $c->stash->{ template } = 'dist/search';
         $c->detach( 'search' );
     }
-
-    my $dist;
-    if ( $distname =~ /^\d+$/ ) {
-        $dist = $c->model( 'DBIC::Dist' )->find( $distname );
-    } else {
-        $dist = $c->model( 'DBIC::Dist' )->search( { dist => $distname } )->first;
-
-        if( !$dist ) {
-        # TODO
-        #my @mod=Module::CPAN->search(module=>$distname_colons);
-        #if (@mod == 1) {
-        #    return $c->res->redirect("/dist/".$mod[0]->dist->dist_without_version);
-        #}
-            $c->stash->{ template } = 'dist/search';
-            $c->detach( 'search', [ $distname ] );
-        }
+    
+    my $dist = $c->model('DBIC::Dist')->get_dist($distname);
+    if( !$dist ) {
+        $c->stash->{ template } = 'dist/search';
+        $c->detach( 'search', [ $distname ] );
     }
+
     $c->stash->{dist} = $dist;
     return $dist;
 }
 
+sub json : Local Args(1) {
+my ($self,$c,$distname) = @_;
+$c->forward('get_dist',[ $distname ]);
+}
+
+# FIXME: All this crud should be movied into the model.
+my %bys=( 
+size_packed     => 'size_packed DESC,dist',
+size_unpacked   => 'size_unpacked DESC,dist',
+files           => 'files DESC,dist',
+age             => {
+    order_by=>'released,dist',
+    show_field=>'released',
+},
+absolute_kwalitee  => { 
+    join=>'kwalitee',
+    prefetch=>'kwalitee',
+    order_by=>'kwalitee.kwalitee desc,me.dist',
+    '+select' => [ 'kwalitee.kwalitee' ],
+    '+as'     => [ 'kwalitee' ],
+    show_field=>'kwalitee',
+},
+core_kwalitee    =>  { 
+    join=>'kwalitee',
+    prefetch=>'kwalitee',
+    order_by=>'kwalitee.rel_core_kw desc,me.dist',
+    '+select' => [ 'kwalitee.rel_core_kw' ],
+    '+as'     => [ 'kwalitee' ],
+    show_field=>'kwalitee',
+},
+
+);
+
 sub by : Local {
     my ( $self, $c, $fld ) = @_;
-    $c->stash->{field}=$fld;
-    my $order='DESC';
-    if ($fld eq 'released') {
-        $order='';
-        $c->stash->{template}='dist/by_date';
+    my $by=$bys{$fld} || die "No such page: stats/by/$fld";
+    my $title=$fld;
+    my @order;
+    if (ref($by) eq 'HASH') {
+        $fld=$by->{show_field} if $by->{show_field};
+        @order=%$by;
+        $c->stash->{no_format}=1;
     }
+    else {
+        @order=(order_by=>$by);
+    }
+    $c->stash->{template}='dist/by_date' if $fld eq 'released';
+    $c->stash->{field}=$fld;
+    $c->stash->{title}=$title;
+    
     $c->stash->{ list } = $c->model( 'DBIC::Dist' )->search(
         {},
         {
-            order_by => $fld . ' '.$order,
+            @order,
             page     => $c->request->param( 'page' ) || 1,
             rows     => 40,
         }
@@ -154,7 +163,7 @@ sub by_required : Local {
     my ( $self, $c, $fld ) = @_;
     $c->stash->{field}=$fld;
     $c->stash->{template}='dist/by';
-
+    
     $c->stash->{ list } = $c->model( 'DBIC::Dist' )->search_related(
         'requiring',
         { 'requiring.in_dist'=> { '>'=>'0' } },
@@ -169,6 +178,7 @@ sub by_required : Local {
 
 
 }
+
 
 
 # TODO move to Kwalitee
@@ -188,6 +198,24 @@ sub shortcoming : Local {
         }
     );
 }
+
+sub complying : Local {
+    my ( $self, $c ) = @_;
+    my $sc = $c->req->param( 'metric' );
+
+    $c->stash->{ list } = $c->model( 'DBIC::Dist' )->search(
+        {
+            "kwalitee.$sc" => 1,
+        },
+        {
+            join     => [ qw( kwalitee ) ],
+            order_by => 'me.dist',
+            page     => $c->request->param( 'page' ) || 1,
+            rows     => 40,
+        }
+    );
+}
+
 
 sub clean_distname {
     my ( $self, $distname ) = @_;

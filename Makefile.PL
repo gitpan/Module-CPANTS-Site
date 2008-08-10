@@ -6,9 +6,11 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Module/CPANTS/Site.pm',
           'PREREQ_PM' => {
                            'Catalyst' => '5.7000',
+                           'Catalyst::Controller::BindLex' => '0.03',
                            'Catalyst::Model::DBIC::Schema' => '0.16',
                            'Catalyst::Plugin::ConfigLoader' => '0.11',
                            'Catalyst::Plugin::Static::Simple' => '0.14',
+                           'Catalyst::View::JSON' => '0.23',
                            'Catalyst::View::TT' => '0.23',
                            'DBD::SQLite' => '1.14',
                            'DBIx::Class' => '0.07000',
